@@ -1,7 +1,7 @@
 #include "CtaBanc.h"
 #include <iostream>
 using namespace std;
-CtaBanc::CtaBanc(){
+CtaBanc::CtaBanc() {
     nombre = "-";
     saldo = 0;
 }
@@ -17,6 +17,12 @@ void CtaBanc::setSaldo(double input) {
 
 void CtaBanc::setNombre(string nom) {
     nombre = nom;
+}
+double CtaBanc::getSaldo() {
+    return saldo;
+}
+string CtaBanc::getNombre() {
+    return nombre;
 }
 void CtaBanc::deposita(double input) {
     saldo += input;
