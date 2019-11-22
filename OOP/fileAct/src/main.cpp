@@ -1,8 +1,6 @@
 #include<fstream>
 #include<iostream>
 #include<string>
-#include<sstream>
-#include<vector>
 using namespace std;
 size_t count(string &line,char target) {
     size_t count = 0;
