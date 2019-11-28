@@ -4,7 +4,7 @@ class Tiempo {
         Tiempo();
         Tiempo(int h, int m);
         int getHora();
-        int getMin();
+        string getMin();
         void setHora(int h);
         void setMin(int m);
         Tiempo getTiempoFinal(int duracion);
@@ -34,8 +34,12 @@ void Tiempo::setHora(int h) {
     this ->hora = h;
 }
 
-int Tiempo::getMin() {
-    return this->minuto;
+string Tiempo::getMin() {
+    if (this->minuto > 0) {
+        return to_string(this->minuto);
+    } else {
+        return "00";
+    }
 }
 
 void Tiempo::setMin(int m) {

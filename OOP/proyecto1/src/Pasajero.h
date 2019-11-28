@@ -4,13 +4,16 @@ using namespace std;
 class Pasajero {
     private:
         int id;
+        int vueloId;
         string destino;
-        string inicio;
+        string salida;
         string nombre;
     public:
         Pasajero();
-        Pasajero(int id, string nombre, string destino, string salida);
+        Pasajero(string nombre, string salida, string destino,int id, int vueloId);
         void setId(int id);
+        void setVueloId(int vueloId);
+        int getVueloId();
         int getId();
         void setDestino(string destino);
         string getDestino();
@@ -21,17 +24,33 @@ class Pasajero {
 };
 
 Pasajero::Pasajero() {
-    nombre = "null";
-    inicio = "DEFAULT";
-    destino = "DEFAULT";
-    id = 0;
+    this->nombre = "null";
+    this->salida = "DEFAULT";
+    this->destino = "DEFAULT";
+    this->id = 0;
+}
+void Pasajero::setNombre(string nombre) {
+    this->nombre = nombre;
 }
 
-Pasajero::Pasajero(int id, string destino, string inicio, string nombre) {
+string Pasajero::getNombre() {
+    return this->nombre;
+}
+
+
+Pasajero::Pasajero(string nombre, string salida, string destino, int id, int vueloId) {
     this->nombre = nombre;
-    this->inicio = inicio;
+    this->salida = salida;
     this->destino = destino;
     this->id = id;
+    this->vueloId = vueloId;
+}
+int Pasajero::getVueloId() {
+    return this->vueloId;
+}
+
+void Pasajero::setVueloId(int input) {
+    this->vueloId = input;
 }
 
 void Pasajero::setId(int id) {
@@ -51,10 +70,10 @@ string Pasajero::getDestino() {
 }
 
 void Pasajero::setSalida(string inicio) {
-    this->inicio = inicio;
+    this->salida = inicio;
 }
 
 string Pasajero::getSalida() {
-    return this->inicio;
+    return this->salida;
 }
 
