@@ -14,8 +14,8 @@ class Pasajero {
         int getId();
         void setDestino(string destino);
         string getDestino();
-        void setInicio(string inicio);
-        string getInicio();
+        void setSalida(string inicio);
+        string getSalida();
         void setNombre(string nombre);
         string getNombre();
 };
@@ -50,11 +50,11 @@ string Pasajero::getDestino() {
     return this->destino;
 }
 
-void Pasajero::setInicio(string inicio) {
+void Pasajero::setSalida(string inicio) {
     this->inicio = inicio;
 }
 
-string Pasajero::getInicio() {
+string Pasajero::getSalida() {
     return this->inicio;
 }
 
