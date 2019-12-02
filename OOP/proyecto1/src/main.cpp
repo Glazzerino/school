@@ -116,7 +116,7 @@ void muestraPasajeros(Vuelo vuelo) {
     cout << "> Mostrando pasajeros del vuelo " << vuelo.getId() <<" ";
     cout << "con salida de " << vuelo.getSalida() << " " << "y destino a ";
     cout << vuelo.getDestino()<< endl;
-    for (int i=0;i<vuelo.getNumDePasajeros()+1; i++) {
+    for (int i=0;i<vuelo.getNumDePasajeros(); i++) {
         Pasajero &ctxpasajero = vuelo.getPasajero(i);
         cout << "Nombre: " << ctxpasajero.getNombre() << " | ";
         cout << "ID: " << ctxpasajero.getId() << " | ";
@@ -186,7 +186,7 @@ bool agregaAeropuerto(string aeropuertos[], int numDeAeropuertos) {
         }
         if (codigoUnico) {
             numDeAeropuertos++;
-            aeropuertos[numDeAeropuertos] = input;
+            aeropuertos[numDeAeropuertos - 1] = input;
             return true;
         }
         else {

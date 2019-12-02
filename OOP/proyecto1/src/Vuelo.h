@@ -1,10 +1,11 @@
 #pragma once
+using namespace std;
 #include <fstream>
 #include <string>
 #include <iostream>
 #include "Pasajero.h"
 #include "Tiempo.h"
-using namespace std;
+
 class Vuelo {
     private:
         string salida;
@@ -39,7 +40,7 @@ Vuelo::Vuelo() {
     this->salida = "CDM";
     this->duracion = 120;
     this->tiempo = Tiempo(0,0);
-    this->numDePasajeros = -1;
+    this->numDePasajeros = 0;
 }
 
 int Vuelo::getId() {
@@ -55,7 +56,7 @@ int Vuelo::getNumDePasajeros() {
 
 void Vuelo::addPasajero(Pasajero usuario) {
     this->numDePasajeros++;
-    this->pasajeros[numDePasajeros] = usuario;
+    this->pasajeros[numDePasajeros - 1] = usuario;
 }
 
 void Vuelo::setNumDePasajeros(int n) {
