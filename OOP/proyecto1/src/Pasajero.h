@@ -76,4 +76,3 @@
     string Pasajero::getSalida() {
         return this->salida;
     }
-

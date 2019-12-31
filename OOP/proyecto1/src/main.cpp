@@ -250,8 +250,7 @@ int main() {
                     cout << "Error, no se pudo agregar aeropuerto" << endl;
                 }
                 break;
-        }
-
+            }
     } while(input != 'q');
     return 0;
 }
