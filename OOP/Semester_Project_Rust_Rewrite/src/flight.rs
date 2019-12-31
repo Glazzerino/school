@@ -21,6 +21,9 @@ impl Flight {
     pub fn get_users(self: &Self) -> Vec<User> {
         self.users.clone()
     }
+    pub fn get_id(self: &Self) -> u32 {
+        self.id
+    }
     pub fn add_user(self: &mut Self, new_user: User) -> Result<bool, String> {
         for i in &self.users {
             if i.getId() == new_user.getId() {
@@ -40,10 +43,10 @@ impl Flight {
     }
     pub fn show_users(self: &Self) {
         let mut j = 1;
+        println!("Passengers with flight id no. {}", self.get_id());
         for i in &self.users {
-            println!("{} {} {} {}",i.getName(), i.getOrigin(), i.getId(),j);
-            j += 1;
+            println!("Name: {} | Origin: {} | Destination: {} | ID: {} |",
+            i.getName(),i.getOrigin(),i.getDestiny(), i.getId());
         }
-        
     }
 }

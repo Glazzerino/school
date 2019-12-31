@@ -14,6 +14,8 @@ fn main() {
     let mut users_file = Path::new("../../textfiles/data.txt");
     let mut file = OpenOptions::new().read(true).open(users_file).unwrap(); 
     let mut flight = flight::Flight::new(12546);
-    flight.load_users(&file);
-    flight.show_users();
+    match flight.load_users(&file) {
+        Ok(_) => {flight.show_users();},
+        Err(e) => {println!("{}",e)},
+    }
 }

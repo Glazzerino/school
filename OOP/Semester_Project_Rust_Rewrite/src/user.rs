@@ -20,7 +20,9 @@ impl User {
     pub fn from(string: String) -> Result<Self,String> {
         let data: Vec<String> = string.split_whitespace().map(|x| x.to_string()).collect();
         if data.len() != 5 {
-            return Err("Invalid line".to_string());
+            let err_line = format!("Invalid line: Number of items must be 5 \n 
+            dump: {}", string);
+            return Err(err_line);
         } 
        let user = User {
             name: data[0].to_string(),
