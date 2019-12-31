@@ -17,6 +17,20 @@ impl User {
             flight_id: 0,
         }
     }
+    pub fn from(string: String) -> Result<Self,String> {
+        let data: Vec<String> = string.split_whitespace().map(|x| x.to_string()).collect();
+        if data.len() != 5 {
+            return Err("Invalid line".to_string());
+        } 
+       let user = User {
+            name: data[0].to_string(),
+            destiny: data[1].to_string(),
+            origin: data[2].to_string(),
+            id: data[3].parse::<u32>().unwrap(),
+            flight_id: data[4].parse::<u32>().unwrap(),
+        };
+        Ok(user)
+    }
     pub fn setDestiny(self: &mut Self, dest: String) {
         self.destiny = dest;
     }
