@@ -6,7 +6,7 @@ pub struct User {
     id: u32,
     flight_id: u32,
 }
-
+#[allow(dead_code)]
 impl User {
     pub fn new(name: String, id: u32) -> Self {
         User {
