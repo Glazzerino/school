@@ -20,15 +20,14 @@ impl Flight {
         }
     }
     pub fn from(line : String) -> Self {
-        let data = line.split_whitespace();     
-        let data: Vec<String> = data.map(|x| x.to_string()).collect();
+        let mut data = line.split_whitespace().map(|x| x.to_string());
         Flight {
-            origin: data[0],
-            destiny: data[1],
-            duration : data[2],
-            id: data[3].parse::<u32>().unwrap(),
-            hour : data[4],
-            minutes: data[5],
+            origin: data.next().unwrap(),
+            destiny: data.next().unwrap(),
+            duration : data.next().unwrap(),
+            id: data.next().unwrap().parse::<u32>().unwrap(),
+            hour : data.next().unwrap(),
+            minutes: data.next().unwrap(),
             ..Default::default()
         }   
     }
@@ -60,7 +59,7 @@ impl Flight {
     //     return Ok(true);
     // }
     pub fn show_users(self: &Self) {
-        println!("Passengers with flight id no. {}", self.get_id());
+        println!("\nPassengers with flight ID {}", self.get_id());
         for i in &self.users {
             println!("Name: {} | Origin: {} | Destination: {} | ID: {} |",
             i.getName(),i.getOrigin(),i.getDestiny(), i.getId());

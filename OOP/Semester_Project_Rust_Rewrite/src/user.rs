@@ -18,6 +18,7 @@ impl User {
         }
     }
     pub fn from(string: String) -> Result<Self,String> {
+        //Silvia_Salazar MTY CDM 0982 9283
         let data: Vec<String> = string.split_whitespace().map(|x| x.to_string()).collect();
         if data.len() != 5 {
             let err_line = format!("Invalid line: Number of items must be 5 \n 
@@ -31,6 +32,7 @@ impl User {
             id: data[3].parse::<u32>().unwrap(),
             flight_id: data[4].parse::<u32>().unwrap(),
         };
+        println!("USer from: {}", &user.getFlightId());
         Ok(user)
     }
     pub fn setDestiny(self: &mut Self, dest: String) {
