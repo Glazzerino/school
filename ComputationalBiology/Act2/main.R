@@ -1,5 +1,6 @@
 # install.packages("stringr")
 library(stringr)
+library(MASS)
 nuevos_pacientes <- read.csv("E:/Code/school/ComputationalBiology/Act2/NUEVO_INGRESO.csv")
 # Revisa si los datos cargados son del tipo DataFrame
 ans <- "no"
@@ -10,22 +11,19 @@ print(paste("El archivo ", ans, " es DataFrame\n"));
 cat(paste("Observaciones: ", nrow(nuevos_pacientes)),"\n")
 cat(paste("Variables: ", nrow(nuevos_pacientes) * ncol(nuevos_pacientes)),"\n")
 enfermedades <- unique(nuevos_pacientes$DESCRIPCION.DIAGNOSTICO)
-relevantes <- vector()
-counter <- 0
-# filtrado para obtener solamente los padecimientos oncológicos
-for(str in enfermedades) {
-    if (str_detect(str,"OMA") || str_detect(str, "TUMOR") || str_detect(str, "HODGKIN")) {
-        counter <- counter + 1;
-        relevantes[counter] <- str
-    }
-}
-cat(paste("Numero de padecimientos oncologicos: ", length(relevantes)),"\n")
+
+cat(paste("Numero de padecimientos oncologicos: ", length(enfermedades)),"\n")
 
 # Obtenemos los estados con mayor cantidad de incidencias 
-top10estados <- tail(names(sort(table(nuevos_pacientes$ESTADO))), 10)
-top10ciudades <- tail(names(sort(table(nuevos_pacientes$MUNICIPIO))), 10)
+# top10estados <- tail(names(sort(table(nuevos_pacientes$ESTADO))), 10)
+# top10ciudades <- tail(names(sort(table(nuevos_pacientes$MUNICIPIO))), 10)
+
+print(estados_unicos)
+print(paste(estados_unicos, " estados diferentes en el dataframe"))
 cat(paste("Estados con mayores incidencias: \n"))
-print(top10estados)
+print(summary(nuevos_pacientes$ESTADO,10))
 cat(paste("Ciudades con mayores incidencias: \n"))
-print(top10ciudades)
+print(summary(nuevos_pacientes$MUNICIPIO,10))
+cat(paste("Cantidad de estados: ", length(unique(nuevos_pacientes$ESTADO))),"\n")
+# print(summary(nuevos_pacientes))
 
