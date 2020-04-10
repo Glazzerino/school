@@ -1,8 +1,8 @@
 # install.packages("stringr")
 
 # library(MASS)
-nuevos_pacientes <- read.csv("E:/Code/school/ComputationalBiology/Act2/NUEVO_INGRESO.csv")
-# Revisa si los datos cargados son del tipo DataFrame
+nuevos_pacientes <- read.csv("NUEVO_INGRESO.csv")
+Revisa si los datos cargados son del tipo DataFrame
 ans <- "no"
 if (is.data.frame(nuevos_pacientes)) {
     ans <-"si"
@@ -25,3 +25,6 @@ cat(paste("Cantidad de estados: ", length(unique(nuevos_pacientes$ESTADO)),"\n")
 
 print(head(nuevos_pacientes,6))
 
+#Pacientes con cancer de colon
+colon <- subset(nuevos_pacientes,grepl("COLON",nuevos_pacientes$DESCRIPCION.DIAGNOSTICO),select=FOLIO:DESCRIPCION.DIAGNOSTICO)
+print(nrow(colon))
