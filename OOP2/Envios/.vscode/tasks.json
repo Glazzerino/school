@@ -8,11 +8,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-<<<<<<< HEAD
-            "command": ".\\build.bat"
-=======
             "command": "make",
->>>>>>> 1a8e5a2615ebdec21556b8944ff9170e4718391a
         },
         {
             "label": "Build & run C++ project",
@@ -21,14 +17,10 @@
                 "kind": "test",
                 "isDefault": true
             },
-<<<<<<< HEAD
-            "command": ".\\build.bat && .\\bin\\main.exe"
-=======
             "command": "make",
             "args": [
                 "run"
             ]
->>>>>>> 1a8e5a2615ebdec21556b8944ff9170e4718391a
         }
     ]
 }

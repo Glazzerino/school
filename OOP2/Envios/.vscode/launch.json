@@ -2,25 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-<<<<<<< HEAD
-            "name": "C++ Debug (Windows)",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/bin/main.exe",
-=======
             "name": "C++ Debug (gdb)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/main",
->>>>>>> 1a8e5a2615ebdec21556b8944ff9170e4718391a
             "preLaunchTask": "Build C++ project",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
-<<<<<<< HEAD
-=======
             "MIMode": "gdb",
             "miDebuggerPath": "/usr/bin/gdb",
             "setupCommands": [
@@ -30,7 +21,6 @@
                     "ignoreFailures": true
                 }
             ]
->>>>>>> 1a8e5a2615ebdec21556b8944ff9170e4718391a
         }
     ]
 }
