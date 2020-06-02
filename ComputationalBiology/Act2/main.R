@@ -2,7 +2,7 @@
 
 # library(MASS)
 nuevos_pacientes <- read.csv("NUEVO_INGRESO.csv")
-Revisa si los datos cargados son del tipo DataFrame
+# Revisa si los datos cargados son del tipo DataFrame
 ans <- "no"
 if (is.data.frame(nuevos_pacientes)) {
     ans <-"si"
