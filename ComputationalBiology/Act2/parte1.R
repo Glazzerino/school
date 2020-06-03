@@ -1,0 +1,40 @@
+    # install.packages("stringr")
+
+# library(MASS)
+nuevos_pacientes <- read.csv("NUEVO_INGRESO.csv")
+# Revisa si los datos cargados son del tipo DataFrame
+ans <- "no"
+if (is.data.frame(nuevos_pacientes)) {
+    ans <-"si"
+} 
+print(paste("El archivo ", ans, " es DataFrame\n"));
+cat(paste("Observaciones: ", nrow(nuevos_pacientes)),"\n")
+cat(paste("Variables: ", nrow(nuevos_pacientes) * ncol(nuevos_pacientes)),"\n")
+enfermedades <- levels(nuevos_pacientes$DESCRIPCION.DIAGNOSTICO)
+cat(paste("Numero de padecimientos oncologicos: ", length(enfermedades)),"\n")
+
+# Obtenemos los estados con mayor cantidad de incidencias 
+print(levels(nuevos_pacientes$ESTADO))
+cat(paste("Estados con mayores incidencias: \n"))
+print(summary(nuevos_pacientes$ESTADO,10))
+cat(paste("Ciudades con mayores incidencias: \n"))
+print(summary(nuevos_pacientes$MUNICIPIO,10))
+cat(paste("Cantidad de estados: ", length(unique(nuevos_pacientes$ESTADO)),"\n"))
+
+# Despliegue de los primeros 6 pacientes
+
+print(head(nuevos_pacientes,6))
+
+#Pacientes con cancer de colon
+colon <- subset(nuevos_pacientes,grepl("COLON",nuevos_pacientes$DESCRIPCION.DIAGNOSTICO),select=FOLIO:DESCRIPCION.DIAGNOSTICO)
+print(paste("Pacientes con cancer de colon: ",nrow(colon)))
+colon_jovenes <- subset(colon,colon$EDAD <= 50)
+print(paste("Pacientes jovenes con cancer de colon: ",nrow(colon_jovenes)))
+
+# parte 2
+db <- load("Multi_Cancer_Data.RData")
+all <- as.data.frame(multi_cancer_data)
+cancercols <- grepl("Tumor",colnames(all))
+normal_cases <- grepl("Normal",colnames(all))
+cancer <- all[cancercols]
+print(all[normal_cases])

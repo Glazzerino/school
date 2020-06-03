@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+db <- read.csv("https://experiencia21.tec.mx/courses/35173/files/9784934/download?wrap=1")
+print(head(db))
+=======
 
 load("Multi_Cancer_Data.RData")
 all <- as.data.frame(multi_cancer_data)
@@ -34,3 +38,4 @@ print("Prueba T de ambos sets: ")
 print(means_diff)
 
 
+>>>>>>> c80f2d4884ab544e1e7d5a3630a5566c014d4dd3
