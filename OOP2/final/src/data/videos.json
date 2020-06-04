@@ -1,0 +1,30 @@
+{
+    "series": [
+        {
+            "nombre": "Doctor Who",
+            "rating": 3.8,
+            "resumen": "Un alien excéntrico viaja por el universo en busca de aventuras",
+            "num_episodios": 3,
+            "num_temporadas": 2
+        },
+        {
+            "nombre": "Iron Man Armored Adventures",
+            "rating": 4.2,
+            "resumen": "Un adolescente Tony Stark y sus amigos salvan el mundo de ricos locos",
+            "num_episodios": 2,
+            "num_temporadas": 2
+        },
+        {
+            "nombre": "Breaking Bad",
+            "resumen": "Profesor de química enfermo que se adentra al mundo del narcotráfico para dejarle algo a su familia. Todo sale mal.",
+            "rating": 5.0,
+            "num_temporadas": 2,
+            "num_episodios": 3
+        }
+    ],
+    "episodios": [
+        {
+            
+        }
+    ]
+}
