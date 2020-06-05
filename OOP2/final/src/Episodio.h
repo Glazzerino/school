@@ -4,7 +4,7 @@
 class Episodio : public Video {
 public:
     Episodio();
-    Episodio(string, string ,string, int, int, double, GENERO, bool, string,int,int);
+    Episodio(string, string , int, int, double, GENERO, string,int,int,bool espeli);
 
     void set_temporada(int temporada){this->temporada=temporada;};
     int get_temporada(){return this->temporada;};
@@ -12,20 +12,19 @@ public:
     void set_serie(string serie){this->serie=serie;};
     string get_serie(){return serie;};
 
-    bool get_emision(){return emision;};
+
     void imprimir();
 private:
     int temporada;
     int num;
-    bool emision;
     string serie;
 };
 
 Episodio::Episodio() : Video(){}
 
-Episodio::Episodio(string nombre, string resumen,string estudio, int id, int duracion, double rating, 
-GENERO genero,bool emision, string serie, int temporada, int num) : Video( nombre,  resumen, estudio,  id,  duracion,  rating, 
- genero) {
+Episodio::Episodio(string nombre, string resumen, int id, int duracion, double rating, 
+GENERO genero, string serie, int temporada, int num,bool espeli) : Video( nombre,  resumen,  id,  duracion,  rating, 
+ genero,espeli) {
     this->temporada = temporada;
     this->num = num;
     this->serie = serie;

@@ -9,9 +9,9 @@ public:
     virtual void imprimir();
 };
 
-PeliculaWrap::PeliculaWrap() : Contenedor("pelicula", "NA", true){}
+PeliculaWrap::PeliculaWrap() : Contenedor("NA", true){}
 
-PeliculaWrap::PeliculaWrap(Pelicula* pelicula) : Contenedor("pelicula", pelicula->get_nombre(), true) {
+PeliculaWrap::PeliculaWrap(Pelicula* pelicula) : Contenedor(pelicula->get_nombre(), true) {
     if (!Contenedor::agregar(pelicula)) {
         cout << "Error! contenedor lleno para pelicula. Esto no debió pasar" << endl;
     }

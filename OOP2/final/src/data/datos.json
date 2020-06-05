@@ -1,0 +1,170 @@
+{
+    "series": [
+        {
+            "nombre": "Doctor Who",
+            "rating": 3.8,
+            "resumen": "Un alien excéntrico viaja por el universo en busca de aventuras",
+            "num_episodios": 3,
+            "num_temporadas": 2,
+            "genero": "Misterio"
+        },
+        {
+            "nombre": "Iron Man Armored Adventures",
+            "rating": 4.2,
+            "resumen": "El adolescente Tony Stark y sus amigos salvan el mundo de ricos locos",
+            "num_episodios": 2,
+            "num_temporadas": 2,
+            "genero": "Accion"
+        },
+        {
+            "nombre": "Breaking Bad",
+            "resumen": "Profesor de química enfermo que se adentra al mundo del narcotráfico para dejarle algo a su familia. Todo sale mal.",
+            "rating": 5.0,
+            "num_temporadas": 2,
+            "num_episodios": 3,
+            "genero": "Drama"
+        }
+    ],
+    "episodios": [
+        {
+            "nombre": "Fe Li Na",
+            "resumen": "El esperado final de la aclamada serie",
+            "serie": "Breaking Bad",
+            "num": 3,
+            "temporada": 2,
+            "id": 232,
+            "duracion": 60,
+            "rating": 5.0,
+            "genero": "Drama"
+        },
+        {
+            "nombre": "Pilot",
+            "resumen": "Walter White is a high school chemistry teacher living in Albuquerque, New Mexico, with his pregnant wife Skyler and their teenage son Walter Jr., who has cerebral palsy. Walt supplements his low teaching salary by working part-time at a local car wash, where he ends up being humiliated in front of two of the students he teaches. On his 50th birthday, Walt returns home to a surprise party arranged by Skyler.",
+            "serie": "Breaking Bad",
+            "num": 1,
+            "temporada": 1,
+            "id": 1,
+            "duracion": 45,
+            "rating": 5.0,
+            "genero": "Drama"
+        },
+        {
+            "nombre": "Mandala",
+            "resumen": "Combo is selling drugs on a corner when he notices two rival dealers staring him down; he is then killed by a young boy working for them. Skinny Pete, spooked by Combo’s death and Badger's recent brush with the law, decides to quit the drug trade. Walt and Jesse meet with Saul to discuss their next move; he tells them that they are incompetent distributors, and need a businessman who is more restrained than Tuco and will buy their product in bulk. ",
+            "serie": "Breaking Bad",
+            "num": 5,
+            "temporada": 2,
+            "id": 23,
+            "duracion": 45,
+            "rating": 5.0,
+            "genero": "Drama"
+        },
+        {
+            "nombre": "Iron, Forged in Fire: Part 1",
+            "resumen": "Combo is selling drugs on a corner when he notices two rival dealers staring him down; he is then killed by a young boy working for them. Skinny Pete, spooked by Combo’s death and Badger's recent brush with the law, decides to quit the drug trade. Walt and Jesse meet with Saul to discuss their next move; he tells them that they are incompetent distributors, and need a businessman who is more restrained than Tuco and will buy their product in bulk. He offers to reach out to the only distributor of that kind he has heard of, but it will be difficult, as the man is extremely cautious. Jesse is distraught that he got Combo killed, and that night tells Jane to leave his apartment so that he does not harm her recovery when he smokes meth. Jane reluctantly decides to stay with him.",
+            "serie": "Iron Man Armored Adventures",
+            "num": 1,
+            "temporada": 1,
+            "id": 42,
+            "duracion": 25,
+            "rating": 3.2,
+            "genero": "Accion"
+        },
+        {
+            "nombre": "Panther's Prey",
+            "resumen": "Iron Man is tracking an international thief named Moses Magnum right to AIM's secret headquarters, but the Black Panther is after Magnum as well. Magnum stole something that belongs to the Panther, and the Panther aims to get it back, even if he has to go through Iron Man to do it. It is later revealed that Magnum had stolen Vibranium from Wakanda and killed the Panther's father in a revolt. The Panther eventually acknowledges that allowing other people to help him might be a better way to operate than keeping Wakanda's borders forever closed, as it might have saved his father's life if it had been done earlier, once Iron Man saves his life.",
+            "serie": "Iron Man Armored Adventures",
+            "num": 1,
+            "temporada": 2,
+            "id": 42,
+            "duracion": 25,
+            "rating": 4.3,
+            "genero": "Accion"
+        },
+        {
+            "nombre": "Blink",
+            "resumen": "In an abandoned house, the Weeping Angels wait. The only hope to stop them is a young woman named Sally Sparrow and her friend Larry Nightingale. The only catch: the Weeping Angels can move in the blink of an eye. To defeat the ruthless enemy — with only a half of a conversation from the Tenth Doctor as help — the one rule is this: don't turn your back, don't look away and don't blink!",
+            "serie": "Doctor Who",
+            "num": 100,
+            "temporada": 1,
+            "id": 512,
+            "duracion": 35,
+            "rating": 5.0,
+            "genero": "Misterio"
+        },
+        {
+            "nombre": "Turn Left",
+            "resumen": "On an alien planet, Donna meets a fortune teller, who launches her into a world based on one question: What would happen if Donna never met the Tenth Doctor? Now a simple refugee, Donna is the only one who can undo the damage. But how?",
+            "serie": "Doctor Who",
+            "num": 746,
+            "temporada": 2,
+            "id": 512,
+            "duracion": 35,
+            "rating": 3.4,
+            "genero": "Misterio"
+        },
+        {
+            "nombre": "Silence in the Library",
+            "resumen": "The Tenth Doctor takes Donna Noble to a planet-sized library in the 51st century. They find it empty of human life, with countless other living beings. An information kiosk warns them to count the shadows.",
+            "serie": "Doctor Who",
+            "num": 532,
+            "temporada": 2,
+            "id": 512,
+            "duracion": 35,
+            "rating": 4.1,
+            "genero": "Misterio"
+        }
+    ],
+    "peliculas": [
+        {
+            "nombre": "Parasite",
+            "resumen": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+            "id": 202912,
+            "duracion": 132,
+            "genero": "Drama",
+            "rating": 5.0,
+            "oscar": true,
+            "saga": "No Aplica"
+        },
+        {
+            "nombre": "Glass",
+            "resumen": "Security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities.",
+            "id": 9637,
+            "duracion": 120,
+            "genero": "Accion",
+            "rating": 3.4,
+            "oscar": false,
+            "saga": "Unbreakable"
+        },
+        {
+            "nombre": "Star Wars: Rougue One",
+            "resumen": "he daughter of an Imperial scientist joins the Rebel Alliance in a risky move to steal the Death Star plans.",
+            "id": 4045,
+            "duracion": 141,
+            "genero": "Accion",
+            "rating": 4.0,
+            "oscar": false,
+            "saga": "Star Wars"
+        },
+        {
+            "nombre": "Charlie and the Chocolate Factory",
+            "resumen": "A young boy wins a tour through the most magnificent chocolate factory in the world, led by the world's most unusual candy maker.",
+            "id": 87628,
+            "duracion": 115,
+            "genero": "Comedia",
+            "rating": 3.0,
+            "oscar": false,
+            "saga": "No aplica"
+        },
+        {
+            "nombre": "Interstellar",
+            "resumen": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+            "id": 9927,
+            "duracion": 148,
+            "genero": "Misterio",
+            "rating": 4.5,
+            "oscar": true,
+            "saga": "No aplica"
+        }
+    ]
+}
