@@ -1,7 +1,8 @@
+// Francisco Zamora Treviño A01570484
 #include "Pelicula.h"
 #include "Episodio.h"
 #include "Serie.h"
-#include "PeliculaWrap.h"
+
 #include "../externo/json.hpp" // <- lib externa usada para leer JSONs
 #include <fstream>
 #include <sstream>
