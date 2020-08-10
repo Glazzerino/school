@@ -175,9 +175,9 @@ int main() {
             do {
                 cin >> seleccion_serie;
             } while(seleccion_serie > series.size());
-            int seleccion_size = series[seleccion_serie]->get_contenido().size();
+            int seleccion_size = series[seleccion_serie-1]->get_contenido().size();
             for (int c=0; c<seleccion_size; c++) {
-                series[seleccion_size - 1]->get_contenido()[c]->imprimir();
+                series[seleccion_size-1]->get_contenido()[c]->imprimir();
             }
             break;
         }
