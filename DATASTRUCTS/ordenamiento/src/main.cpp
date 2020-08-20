@@ -71,15 +71,68 @@ void bubble(vector<T>& lista, int& iter, int& comps) {
     }
 }
 
+//Funcion amiga
+//O*N
+template<class T>
+inline vector<T> mergeVectors(vector<T> first, vector<T> second) {
+    vector<T> final = first;
+    final.push_back(second);
+    return final;
+}
+
+//Funcion amiga
+// O*N
+template<class T>
+inline std::pair<vector<T>, vector<T>> splitVector(vector<T> list) {
+    vector<T> right;
+    vector<T> left;
+    int mid = (list.size() / 2) + (list.size() % 2);
+    for (int i=0; i < mid; i++) {
+        right.push_back(list[i]);
+    }
+
+    for (int i=mid; i<list.size(); i++) {
+        left.push_back(list[i]);
+    }
+    return std::pair<vector<T>, vector<T>> {left, right};
+}
+
+template<class T>
+void mergesort(vector<T> list) {
+    // int l = 0;
+    // int m =  (list.size() / 2) + (list.size() % 2) - 1;
+    // int r = m + 1;
+    bool phase1done = false;
+    vector<vector<T>> metalist;
+    for (int i=0; i < list.size(); i+=2) {
+        vector<T> cell;
+        if (list.size() % 2 != 0 && i == list.size()-1 ) {
+            cell.push_back(list[i]);
+            // cout << "cunt";
+        } else {
+            cell.push_back(list[i]);
+            cell.push_back(list[i+1]);
+        }
+        metalist.push_back(cell);
+    }
+
+    for (vector<T> x: metalist) {
+        for (T y : x) {
+            cout << y << " ";
+        }
+        cout << endl;
+    }
+}
 
 int main() {
     int iteraciones = 0;
     int comparaciones = 0;
-    vector<int> lista = {8,7,6,5,4,3,2,};
-    bubble<int>(lista, iteraciones, comparaciones);
-    for (int x : lista) {
-        cout << x << " ";
-    }
-    // mergeSort(lista);
-    cout <<endl << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
+    vector<int> lista = {8,7,6,5,4,3,2};
+    // bubble<int>(lista, iteraciones, comparaciones);
+    // for (int x : lista) {
+    //     cout << x << " ";
+    // }
+    // cout <<endl << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
+
+    mergesort<int>(lista);
 }
