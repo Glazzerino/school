@@ -72,11 +72,42 @@ void bubble(vector<T>& lista, int& iter, int& comps) {
 }
 
 //Funcion amiga
+//Directa
+template<class T>
+inline T min(T a, T b) {
+    return a < b ? a : b;
+}
+
+//Funcion amiga
 //O*N
 template<class T>
 inline vector<T> mergeVectors(vector<T> first, vector<T> second) {
-    vector<T> final = first;
-    final.push_back(second);
+    size_t final_size = first.size() + second.size();
+    vector<T> final;
+    final.reserve(final_size);
+    for (int i=0; i<final_size; i++) {
+        if (second.size() == 0) {
+            for (int j=first.size()-1; j>=0; j--) {
+                final.push_back(first[j]);
+            }
+            break;
+        }
+        else if (first.size() == 0) {
+            for (int j=second.size()-1; j>=0; j--) {
+                final.push_back(second[j]);
+            }
+            break;
+        }
+
+        if (first.back() < second.back()) {
+            final.push_back(first.back());
+            first.pop_back();
+        } else {
+            final.push_back(second.back());
+            second.pop_back();
+        }
+
+    }
     return final;
 }
 
@@ -84,17 +115,17 @@ inline vector<T> mergeVectors(vector<T> first, vector<T> second) {
 // O*N
 template<class T>
 inline std::pair<vector<T>, vector<T>> splitVector(vector<T> list) {
-    vector<T> right;
-    vector<T> left;
+    vector<T> first;
+    vector<T> second;
     int mid = (list.size() / 2) + (list.size() % 2);
     for (int i=0; i < mid; i++) {
-        right.push_back(list[i]);
+        first.push_back(list[i]);
     }
 
     for (int i=mid; i<list.size(); i++) {
-        left.push_back(list[i]);
+        second.push_back(list[i]);
     }
-    return std::pair<vector<T>, vector<T>> {left, right};
+    return std::pair<vector<T>, vector<T>> {first, second};
 }
 
 template<class T>
@@ -127,12 +158,19 @@ void mergesort(vector<T> list) {
 int main() {
     int iteraciones = 0;
     int comparaciones = 0;
-    vector<int> lista = {8,7,6,5,4,3,2};
+    vector<int> lista = {5,4,3,2,1};
     // bubble<int>(lista, iteraciones, comparaciones);
     // for (int x : lista) {
     //     cout << x << " ";
     // }
     // cout <<endl << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
-
-    mergesort<int>(lista);
+    vector<int> test1 = {5,4};
+    vector<int> test2 = {3};
+    auto couple = splitVector(lista);
+    vector<int> merged = mergeVectors<int>(couple.second, couple.first);
+    for (int x : merged) {
+        cout << x << " ";
+    }
+    cout << endl;
+    // mergesort<int>(lista);
 }
