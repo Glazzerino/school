@@ -1,37 +1,161 @@
-// silly experiment to try out generic programming
 #include <iostream>
-#include <string>
+#include <vector>
+#include <chrono>
+// HACER MENU
+// CONTAR CUANTAS COMPARACIONES SE HACEN
+// CONTAR INTERCAMBIOS
+// EVALUAR TIEMPO DE EJECUCION
 using namespace std;
 
-template <typename T> 
-T const& Max (T const& a, T const& b) {
-    return a < b ? b:a;
-}
-template <typename T>
-T generic_sum(T a, T b) {
-    return (b + a);
+
+class Timer {
+public:
+    Timer() {
+        start = std::chrono::high_resolution_clock::now();
+    };
+
+    ~Timer() {
+        end = std::chrono::high_resolution_clock::now();
+        auto timestep = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        cout << "Execution time: " << timestep << " nanoseconds" << endl;
+    };
+private:
+    std::chrono::high_resolution_clock::time_point start,end;
+};
+
+template<class T>
+void selectionSort(vector<T>& list) {
+    Timer timer;
+    for (int i=0; i<list.size()-1; i++) {
+        int min = list[i];
+        for (int j=i; j<list.size(); j++) {
+            if (list[j] < min) {
+                min = list[j];
+            }
+            if (j == list.size()-1) {
+                swap(list[j], list[i]);
+            }
+        }
+    }
 }
 
-template <typename T>   
-std::pair<T,T> ask(T a, T b) {
-    cout << "Enter first number: ";
-    cin >> a;
-    cout << "Enter second number: ";
-    cin >> b;
-    // cout << "Max number is: " << Max(a,b) << endl;
-    return std::pair<T,T> (a,b);
+
+
+int swaps = 0;
+template<class T>
+inline void swap(T* a,T* b) {
+    T aux = b;
+    b = a;
+    a = aux;
+}
+
+// O(n2)
+template<class T>
+void intercambio(vector<T>& lista, int& iter, int& comps) {
+    Timer time;
+    for (int i=0; i<lista.size(); i++) {
+        iter++;
+        comps++;
+        // cout << "Current num: " << lista[i] << endl;
+        for (int x=i+1; x<lista.size(); x++) {
+            iter++;
+            comps++;
+            if (lista[x] > lista[i]) {
+                comps++;
+                swap(lista[x],lista[i]);
+            }
+        }
+    }
+}
+
+//(O*N^2)
+template<class T>
+void bubble(vector<T>& lista, int& iter, int& comps) {
+    bool swapped = true;
+    Timer timer;
+    for (int i=0; i < lista.size()-1; i++) {
+        iter++;
+        for (int x=0; x < lista.size()-i-1; x++) {
+            swapped=false;
+            iter++;
+            if (lista[x+1]< lista[x]) {
+                swapped = true;
+                comps++;
+                swap(lista[x+1], lista[x]);
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+    }
+}
+
+//Funcion amiga
+//O*N
+template<class T>
+inline vector<T> mergeVectors(vector<T> first, vector<T> second) {
+    vector<T> final = first;
+    final.push_back(second);
+    return final;
+}
+
+//Funcion amiga
+// O*N
+template<class T>
+inline std::pair<vector<T>, vector<T>>splitVector(vector<T> list) {
+    vector<T> right;
+    vector<T> left;
+    int mid = (list.size() / 2) + (list.size() % 2);
+    for (int i=0; i < mid; i++) {
+        right.push_back(list[i]);
+    }
+
+    for (int i=mid; i<list.size(); i++) {
+        left.push_back(list[i]);
+    }
+    return std::pair<vector<T>, vector<T>> {left, right};
+}
+
+template<class T>
+void mergesort(vector<T> list) {
+    int l = 0;
+    int m =  (list.size() / 2) + (list.size() % 2) - 1;
+    int r = m + 1;
+    // cout << l << " " << m << " " << r << endl;
+    bool phase1done = false;
+    vector<vector<T>> metalist;
+    for (int i=0; i < list.size(); i+=2) {
+        vector<T> cell;
+        if (list.size() % 2 != 0 && i == list.size()-3 ) {
+            cell.push_back(list[i]);
+            cout << "cunt";
+        } else {
+            cell.push_back(list[i]);
+            cell.pop_back(list[i+1]);
+        }
+        metalist.push_back(cell);
+    }
+
+    for (vector<T> x: metalist) {
+        for (T y : x) {
+            cout << y << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main() {
-    float num1, num2; // 0.76876 465468.89686
-    auto couple = ask(num1,num2);
-    cout << "Max number" << max(couple.first, couple.second) << endl;
+    int iteraciones = 0;
+    int comparaciones = 0;
+    vector<int> lista = {8,7,6,5,4};
+    // bubble<int>(lista, iteraciones, comparaciones);
 
-    int num3, num4;
-    auto ints = ask(num3,num4);
-    cout << "Max number:" << max(ints.first, ints.second) << endl;
+    selectionSort(lista);
+    for (int x : lista) {
+        cout << x << " ";
+    }
+    // cout <<endl << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
 
-    char c1,c2;
-    cin >> c1 >> c2;
-    cout << (int) generic_sum(c1,c2);
+    // mergesort<int>(lista);
+    
 }

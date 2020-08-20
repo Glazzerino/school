@@ -22,12 +22,28 @@ public:
 private:
     std::chrono::high_resolution_clock::time_point start,end;
 };
+
 int swaps = 0;
 template<class T>
 inline void swap(T* a,T* b) {
     T aux = b;
     b = a;
     a = aux;
+}
+
+template<class T>
+void selectionSort(vector<T>& list) {
+    Timer timer;
+    int min;
+    for (int i=0; i<list.size(); i++) {
+        min = i;
+        for (int j=i; j<list.size(); j++) {
+            if (list[j] < list[min]) {
+                min = j;
+            }
+        }
+        swap(list[min], list[i]);
+    }
 }
 
 // O(n2)
@@ -164,13 +180,15 @@ int main() {
     //     cout << x << " ";
     // }
     // cout <<endl << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
-    vector<int> test1 = {5,4};
-    vector<int> test2 = {3};
-    auto couple = splitVector(lista);
-    vector<int> merged = mergeVectors<int>(couple.second, couple.first);
-    for (int x : merged) {
+    // vector<int> test1 = {5,4};
+    // vector<int> test2 = {3};
+    // auto couple = splitVector(lista);
+    // vector<int> merged = mergeVectors<int>(couple.second, couple.first);
+    selectionSort(lista);
+    for (int x : lista) {
         cout << x << " ";
     }
-    cout << endl;
+    // cout << endl;
+
     // mergesort<int>(lista);
 }
