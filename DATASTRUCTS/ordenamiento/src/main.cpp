@@ -23,6 +23,22 @@ private:
     std::chrono::high_resolution_clock::time_point start,end;
 };
 
+//BUSQUEDA
+template<class T>
+size_t sequential(vector<T>& list, T query) {
+    size_t x;
+    for (x = 0; x < list.size(); x++) {
+        if (list[x] == query) {
+            return x;
+        }
+    }
+    return -1;
+}
+
+
+//FINAL BUSQUEDA
+
+
 int swaps = 0;
 template<class T>
 inline void swap(T* a,T* b) {
@@ -31,6 +47,32 @@ inline void swap(T* a,T* b) {
     a = aux;
 }
 
+template<class T>
+void insertionSort(vector<T>& list) {
+    Timer timer;
+    int i;
+    int x;
+    T aux;
+    bool swapped;
+    for (x = 1; x < list.size(); x++) {
+        swapped = false;
+        if (list[x] < list[x-1]) {
+            // swapped = true;
+            for (i=0;i<x;i++) {
+                if (list[i] > list[x]) {
+                    // aux = list[x];
+                    list.emplace(list.begin()+i,list[x]);
+                    list.erase(list.begin() + x+1);
+                    break;
+                }
+            }
+        }
+        
+    }
+}
+
+
+// O(n2)
 template<class T>
 void selectionSort(vector<T>& list) {
     Timer timer;
@@ -68,7 +110,7 @@ void intercambio(vector<T>& lista, int& iter, int& comps) {
 //(O*N^2)
 template<class T>
 void bubble(vector<T>& lista, int& iter, int& comps) {
-    bool swapped = true;
+    bool swapped = false;
     Timer timer;
     for (int i=0; i < lista.size()-1; i++) {
         iter++;
@@ -174,7 +216,9 @@ void mergesort(vector<T> list) {
 int main() {
     int iteraciones = 0;
     int comparaciones = 0;
-    vector<int> lista = {5,4,3,2,1};
+    vector<int> lista = {1,4,2,3,5,100,20,0,8};
+    vector<float> fracciones = {0.2,421.42,6.4,980.002};
+    cout << sequential<float>(fracciones, 6.4) << endl;
     // bubble<int>(lista, iteraciones, comparaciones);
     // for (int x : lista) {
     //     cout << x << " ";
@@ -184,10 +228,9 @@ int main() {
     // vector<int> test2 = {3};
     // auto couple = splitVector(lista);
     // vector<int> merged = mergeVectors<int>(couple.second, couple.first);
-    selectionSort(lista);
-    for (int x : lista) {
-        cout << x << " ";
-    }
+    // for (int x : lista) {
+    //     cout << x << " ";
+    // }
     // cout << endl;
 
     // mergesort<int>(lista);
