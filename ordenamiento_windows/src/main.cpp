@@ -1,11 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <ctime>
+#include <type_traits>
 // HACER MENU
 // CONTAR CUANTAS COMPARACIONES SE HACEN
 // CONTAR INTERCAMBIOS
 // EVALUAR TIEMPO DE EJECUCION
 using namespace std;
+
 
 
 class Timer {
@@ -22,12 +25,92 @@ public:
 private:
     std::chrono::high_resolution_clock::time_point start,end;
 };
+
+
+template<class T> 
+vector<T> randomVector(int n) {
+    std::srand(time(nullptr));
+    vector<T> rand_vector;
+    rand_vector.reserve(n);
+    int i;
+    T temp;
+    // bool is_float = ;
+    cout << std::is_floating_point<T>::value << endl;
+    for (i=0;i<n;i++) {
+        // temp = (T) (rand()) / (T) (RAND_MAX);
+        if (is_floating_point<T>::value) {
+            temp = (T) (RAND_MAX)+(T)(rand()) / (T) (rand());
+        }
+        else {
+            temp = rand();
+        }
+        rand_vector.push_back(temp);
+    }
+    return rand_vector;
+}
+
+//BUSQUEDA
+template<class T>
+size_t sequential(vector<T>& list, T query) {
+    size_t x;
+    for (x = 0; x < list.size(); x++) {
+        if (list[x] == query) {
+            return x;
+        }
+    }
+    return -1;
+}
+
+
+//FINAL BUSQUEDA
+
+
 int swaps = 0;
 template<class T>
 inline void swap(T* a,T* b) {
     T aux = b;
     b = a;
     a = aux;
+}
+
+template<class T>
+void insertionSort(vector<T>& list) {
+    Timer timer;
+    int i;
+    int x;
+    T aux;
+    bool swapped;
+    for (x = 1; x < list.size(); x++) {
+        swapped = false;
+        if (list[x] < list[x-1]) {
+            // swapped = true;
+            for (i=0;i<x;i++) {
+                if (list[i] > list[x]) {
+                    // aux = list[x];
+                    list.emplace(list.begin()+i,list[x]);
+                    list.erase(list.begin() + x+1);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+
+// O(n2)
+template<class T>
+void selectionSort(vector<T>& list) {
+    Timer timer;
+    int min;
+    for (int i=0; i<list.size(); i++) {
+        min = i;
+        for (int j=i; j<list.size(); j++) {
+            if (list[j] < list[min]) {
+                min = j;
+            }
+        }
+        swap(list[min], list[i]);
+    }
 }
 
 // O(n2)
@@ -52,7 +135,7 @@ void intercambio(vector<T>& lista, int& iter, int& comps) {
 //(O*N^2)
 template<class T>
 void bubble(vector<T>& lista, int& iter, int& comps) {
-    bool swapped = true;
+    bool swapped = false;
     Timer timer;
     for (int i=0; i < lista.size()-1; i++) {
         iter++;
@@ -85,16 +168,30 @@ inline vector<T> mergeVectors(vector<T> first, vector<T> second) {
     size_t final_size = first.size() + second.size();
     vector<T> final;
     final.reserve(final_size);
-
     for (int i=0; i<final_size; i++) {
         if (second.size() == 0) {
-            final.push_back(first);
-        } 
-        else if (first.size() == 0) {
-            final.push_back(second);
+            for (int j=first.size()-1; j>=0; j--) {
+                final.push_back(first[j]);
+            }
+            break;
         }
+        else if (first.size() == 0) {
+            for (int j=second.size()-1; j>=0; j--) {
+                final.push_back(second[j]);
+            }
+            break;
+        }
+
+        if (first.back() < second.back()) {
+            final.push_back(first.back());
+            first.pop_back();
+        } else {
+            final.push_back(second.back());
+            second.pop_back();
+        }
+
     }
-    
+    return final;
 }
 
 //Funcion amiga
@@ -141,21 +238,57 @@ void mergesort(vector<T> list) {
     }
 }
 
+inline std::pair<char, int> configPromptSort() {
+    int n;
+    char t;
+    do {
+        cout << "Seleccione el tipo y el numero de elementos de la lista (tipo <espacio> numero): \n";
+        cout << "f: Flotante    |   i: Entero\n";
+        cout << "Entrada: \n";
+        cin >> t >> n;
+        if ((t == 'f' || t == 'i') && (n > 0)) {
+            return std::pair<char,int>{t,n};
+        } else {
+            cout << "Entrada inválida, revisa que tu tipo sea \"f\" o \"i\" y que tu numero sea mayor a 0\n";
+        }
+    } while (true);
+}
+
+template<class T>
+inline void displayVector(vector<T>& list) {
+    for (T x : list) {
+        cout << x << " ";
+    }
+    cout << "\n";
+}
+
 int main() {
     int iteraciones = 0;
     int comparaciones = 0;
-    vector<int> lista = {5,4,3,2,1};
-    // bubble<int>(lista, iteraciones, comparaciones);
-    // for (int x : lista) {
-    //     cout << x << " ";
-    // }
-    // cout <<endl << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
-    vector<int> test1 = {5,4};
-    vector<int> test2 = {3};
-    vector<int> merged = mergeVectors<int>(test1,test2);
-    for (int x : merged) {    
-        cout << x << " ";
-    } 
-    cout << endl;
-    // mergesort<int>(lista);
+    char option;
+    int n; // N en lista
+    cout << "BÚSQUEDAS Y ORDENAMIENTO\n";
+    cout << "Opciones: \n";
+    cout << "a) Ordenamiento\n";
+    cout << "b) Busqueda \n";
+    cout << "Entrada: ";
+    cin >> option;
+    
+    switch (option) {
+        case 'a': {
+            char alg_choice;
+            //TODO hacer que condifPromt pregunte por el algoritmo tambien
+            // Este caso debe tener su propio switch case dentro
+            auto config = configPromptSort(); // Se pregunta por configuracion de la lista
+            cout << "Seleccione el algoritmo a utilizar: \n";
+            cout << "a) Ordenamiento de intercambio\n";
+            cout << "b) Ordenamiento de seleccion\n";
+            cout << "c) Ordenamiento de burbuja\n";
+            cout << "d) Ordenamiento de insercion\n";
+            cout << "Entrada: ";
+            cin >> alg_choice;
+            cout << endl;
+
+        }
+    }
 }
