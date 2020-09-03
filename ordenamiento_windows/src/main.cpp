@@ -1,48 +1,89 @@
-#include <iostream>
 #include <vector>
-#include <chrono>
+#include <iomanip>
 #include <ctime>
-#include <type_traits>
+#include <math.h>
+// #include <type_traits>
+#include <stack>
+#include "Timer.h"
+#include <tuple>
+
 // HACER MENU
 // CONTAR CUANTAS COMPARACIONES SE HACEN
 // CONTAR INTERCAMBIOS
 // EVALUAR TIEMPO DE EJECUCION
 using namespace std;
 
+template<class T>
+int partition(vector<T>& list, int start, int end, int& iters, int& comps) {
+    int pivot = list[end];
+
+    int pindex = start;
+
+    for (int i = start; i < end; i++) {
+        iters++;
+        if (list[i] <= pivot) {
+            comps++;
+            swap(list[i], list[pindex]);
+            pindex++;
+        }
+    }
+    swap(list[pindex], list[end]);
+    return pindex;
+}
+
+template<class T>
+void quicksort(vector<T>& list, int &iters, int &comps) {
+    Timer timer;
+    stack<pair<T, T>> pairs;
+    int end = list.size()-1;
+    int start = 0;
+    pairs.push(pair<T, T> {start, end});
+
+    while(!pairs.empty()) {
+        iters++;
+        start = pairs.top().first;
+        end = pairs.top().second;
+        pairs.pop();
+        int pivot = partition(list,start, end, iters, comps);
+        if (pivot - 1 > start) {
+            comps++;
+            pairs.push(pair<T, T> {start, pivot - 1});
+        }
+        if (pivot +1 < end) {
+            comps++;
+            pairs.push(pair<T, T> {pivot+1, end});
+        }
+    }
+    // return list;
+}
+
+void disp_vector(vector<int> list) {
+    for (int x : list) {
+        cout << x << " ";
+    }
+    cout << endl;
+}
 
 
-class Timer {
-public:
-    Timer() {
-        start = std::chrono::high_resolution_clock::now();
-    };
-
-    ~Timer() {
-        end = std::chrono::high_resolution_clock::now();
-        auto timestep = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        cout << "Execution time: " << timestep << " nanoseconds" << endl;
-    };
-private:
-    std::chrono::high_resolution_clock::time_point start,end;
-};
 
 
-template<class T> 
+template<class T>
 vector<T> randomVector(int n) {
     std::srand(time(nullptr));
+    cout << "Numero de elementos: " << n << endl;
     vector<T> rand_vector;
     rand_vector.reserve(n);
     int i;
     T temp;
     // bool is_float = ;
     cout << std::is_floating_point<T>::value << endl;
-    for (i=0;i<n;i++) {
+    for (i=0; i<n; i++) {
         // temp = (T) (rand()) / (T) (RAND_MAX);
         if (is_floating_point<T>::value) {
-            temp = (T) (RAND_MAX)+(T)(rand()) / (T) (rand());
+            temp = ((T) ( rand() % 100) / (rand() % 100));
         }
         else {
-            temp = rand();
+            temp = rand() % 100;
         }
         rand_vector.push_back(temp);
     }
@@ -74,18 +115,22 @@ inline void swap(T* a,T* b) {
 }
 
 template<class T>
-void insertionSort(vector<T>& list) {
+void insertionSort(vector<T>& list, int& iter, int& comps) {
     Timer timer;
     int i;
     int x;
     T aux;
     bool swapped;
     for (x = 1; x < list.size(); x++) {
+        iter++;
         swapped = false;
         if (list[x] < list[x-1]) {
+            comps++;
             // swapped = true;
-            for (i=0;i<x;i++) {
+            for (i=0; i<x; i++) {
+                iter++;
                 if (list[i] > list[x]) {
+                    comps++;
                     // aux = list[x];
                     list.emplace(list.begin()+i,list[x]);
                     list.erase(list.begin() + x+1);
@@ -99,13 +144,16 @@ void insertionSort(vector<T>& list) {
 
 // O(n2)
 template<class T>
-void selectionSort(vector<T>& list) {
+void selectionSort(vector<T>& list, int& iters, int &comps) {
     Timer timer;
     int min;
     for (int i=0; i<list.size(); i++) {
+        iters++;
         min = i;
         for (int j=i; j<list.size(); j++) {
+            iters++;
             if (list[j] < list[min]) {
+                comps++;
                 min = j;
             }
         }
@@ -119,7 +167,6 @@ void intercambio(vector<T>& lista, int& iter, int& comps) {
     Timer time;
     for (int i=0; i<lista.size(); i++) {
         iter++;
-        comps++;
         // cout << "Current num: " << lista[i] << endl;
         for (int x=i+1; x<lista.size(); x++) {
             iter++;
@@ -222,7 +269,6 @@ void mergesort(vector<T> list) {
         vector<T> cell;
         if (list.size() % 2 != 0 && i == list.size()-1 ) {
             cell.push_back(list[i]);
-            // cout << "cunt";
         } else {
             cell.push_back(list[i]);
             cell.push_back(list[i+1]);
@@ -238,16 +284,26 @@ void mergesort(vector<T> list) {
     }
 }
 
-inline std::pair<char, int> configPromptSort() {
+inline std::tuple<char, int, char> configPromptSort() {
     int n;
-    char t;
+    char t, alg;
     do {
         cout << "Seleccione el tipo y el numero de elementos de la lista (tipo <espacio> numero): \n";
         cout << "f: Flotante    |   i: Entero\n";
         cout << "Entrada: \n";
         cin >> t >> n;
+
+        cout << "Seleccione el algoritmo a utilizar: \n";
+        cout << "a) Ordenamiento de intercambio\n";
+        cout << "b) Ordenamiento de burbuja\n";
+        cout << "c) Ordenamiento de insercion\n";
+        cout << "d) Ordenamiento de seleccion\n";
+        cout << "e) Quicksort\n";
+        cout << "Entrada: ";
+        cin >> alg;
+
         if ((t == 'f' || t == 'i') && (n > 0)) {
-            return std::pair<char,int>{t,n};
+            return std::tuple<char,int,char>(t,n,alg);
         } else {
             cout << "Entrada inválida, revisa que tu tipo sea \"f\" o \"i\" y que tu numero sea mayor a 0\n";
         }
@@ -256,13 +312,15 @@ inline std::pair<char, int> configPromptSort() {
 
 template<class T>
 inline void displayVector(vector<T>& list) {
+    cout << "[";
     for (T x : list) {
         cout << x << " ";
     }
-    cout << "\n";
+    cout << "]" << "\n";
 }
 
 int main() {
+        
     int iteraciones = 0;
     int comparaciones = 0;
     char option;
@@ -273,22 +331,105 @@ int main() {
     cout << "b) Busqueda \n";
     cout << "Entrada: ";
     cin >> option;
-    
-    switch (option) {
-        case 'a': {
-            char alg_choice;
-            //TODO hacer que condifPromt pregunte por el algoritmo tambien
-            // Este caso debe tener su propio switch case dentro
-            auto config = configPromptSort(); // Se pregunta por configuracion de la lista
-            cout << "Seleccione el algoritmo a utilizar: \n";
-            cout << "a) Ordenamiento de intercambio\n";
-            cout << "b) Ordenamiento de seleccion\n";
-            cout << "c) Ordenamiento de burbuja\n";
-            cout << "d) Ordenamiento de insercion\n";
-            cout << "Entrada: ";
-            cin >> alg_choice;
-            cout << endl;
 
+    if (option == 'a') {
+        int comparaciones = 0;
+        int iteraciones = 0;
+
+        auto config = configPromptSort(); // Se pregunta por configuracion de la lista
+        char alg = get<2>(config);
+        char tipo = get<0>(config);
+        int n = get<1>(config);
+        
+        switch(alg) {
+
+            case 'a' :{
+                if (tipo == 'f') {
+                    vector<float> list = randomVector<float>(n);
+                    displayVector<float>(list);
+                    intercambio<float>(list,iteraciones, comparaciones);
+                    displayVector<float>(list);
+                }
+                else {
+                    vector<int> list = randomVector<int>(n);
+                    displayVector<int>(list);
+                    intercambio<int>(list,iteraciones, comparaciones);
+                    displayVector<int>(list);
+                }
+                break;
+            }
+            case 'b' : {
+                // burbuja
+                 if (tipo == 'f') {
+                    vector<float> list = randomVector<float>(n);
+                    displayVector<float>(list);
+                    bubble<float>(list,iteraciones, comparaciones);
+                    displayVector<float>(list);
+                }
+                else {
+                    vector<int> list = randomVector<int>(n);
+                    displayVector<int>(list);
+                    bubble<int>(list,iteraciones, comparaciones);
+                    displayVector<int>(list);
+                }
+                break;
+            }
+            case 'c': {
+                // insertion
+                if (tipo == 'f') {
+                    vector<float> list = randomVector<float>(n);
+                    displayVector<float>(list);
+                    insertionSort<float>(list,iteraciones, comparaciones);
+                    displayVector<float>(list);
+                }
+                else {
+                    vector<int> list = randomVector<int>(n);
+                    displayVector<int>(list);
+                    insertionSort<int>(list,iteraciones, comparaciones);
+                    displayVector<int>(list);
+                }
+                break;
+            }
+            case 'd' :{
+                // selection
+                if (tipo == 'f') {
+                    vector<float> lista = randomVector<float>(n);
+                    displayVector(lista);
+                    selectionSort<float>(lista, iteraciones, comparaciones);
+                    displayVector(lista);
+                }
+                else {
+                    vector<int> lista = randomVector<int>(n);
+                    displayVector(lista);
+                    selectionSort<int>(lista, iteraciones, comparaciones);
+                    displayVector(lista);
+                }
+                break;
+            }
+            case 'e': {
+                // quicksort
+                if (tipo == 'f') {
+                    vector<float> lista = randomVector<float>(n);
+                    displayVector(lista);
+                    quicksort<float>(lista, iteraciones, comparaciones);
+                    displayVector(lista);
+                }
+                else {
+                    vector<int> lista = randomVector<int>(n);
+                    displayVector(lista);
+                    quicksort<int>(lista, iteraciones, comparaciones);
+                    displayVector(lista);
+                }
+                break;
+            }
         }
+        cout << "Iteraciones: " << iteraciones << " Comparaciones: " << comparaciones << endl;
     }
-}
+
+        // Alg benchmark
+        
+    }
+
+
+
+
