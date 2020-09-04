@@ -1,38 +1,57 @@
 #include <iostream>
+#include <algorithm>
 #include <stack>
 #include <vector>
+
 using namespace std;
 
-// template<class T>
-// void swap(T& a, T& b) {
-//     T aux = a;
-//     a = b;
-//     b = aux;
-// }
-
-
-int partition(vector<int> list, int start, int end) {
+int partition(vector<int>& list, int start, int end) {
     int pivot = list[end];
-    // elements less than pivot goes to the left of pIndex
-	// elements more than pivot goes to the right of pIndex
-	// equal elements can go either way
 
     int pindex = start;
 
     for (int i = start; i < end; i++) {
-        if (list[pindex] <= list[i]) {
-            swap(list[pindex],list[i]);
+        if (list[i] <= pivot) {
+            swap(list[i], list[pindex]);
             pindex++;
         }
     }
-    
-    swap(list[pindex],list[end]);
+    swap(list[pindex], list[end]);
     return pindex;
 }
 
+void quicksort(vector<int>& list) {
+    stack<pair<int, int>> pairs;
+    int end = list.size()-1;
+    int start = 0;
+    pairs.push(pair<int, int> {start, end});
 
+    while(!pairs.empty()) {
+        start = pairs.top().first;
+        end = pairs.top().second;
+        pairs.pop();
+        int pivot = partition(list,start, end);
+        if (pivot - 1 > start) {
+            pairs.push(pair<int, int>{start, pivot - 1});
+        }
+        if (pivot +1 < end) {
+            pairs.push(pair<int, int>{pivot+1, end});
+        }
+    }
+    // return list;
+}
 
+void disp_vector(vector<int> list) {
+    for (int x : list) {
+        cout << x << " ";
+    }
+    cout << endl;
+}
 
 int main() {
+    vector<int> list = {6, -3, 5, 1, 9, 8, 3, 2, -6};
+    // auto n = quicksort(list);
+    quicksort(list);
+    disp_vector(list);
 
 }

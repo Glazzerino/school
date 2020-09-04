@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// O(N)
 std::pair<char, int> sequentialSearch(string line) {
     int comps = 0;
     for (int i=0; i<line.size(); i+=2) {
@@ -15,7 +16,7 @@ std::pair<char, int> sequentialSearch(string line) {
     }
     return pair<char, int>{' ', -1};
 }
-
+// O(logN)
 std::pair<char, int> binarySearch(string line) {
     int r,m,l;
     l = 0;

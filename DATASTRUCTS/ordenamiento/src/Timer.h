@@ -13,5 +13,5 @@ public:
         std::cout << "Execution time: " << timestep << " nanoseconds" << std::endl;
     };
 private:
-    std::chrono::high_resolution_clock::time_point start,end;
+    std::chrono::high_resolution_clock::time_point start, end;
 };
