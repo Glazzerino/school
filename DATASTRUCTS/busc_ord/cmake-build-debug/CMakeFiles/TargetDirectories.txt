@@ -1,0 +1,3 @@
+/home/glazz/code/school/DATASTRUCTS/busc_ord/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/glazz/code/school/DATASTRUCTS/busc_ord/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/glazz/code/school/DATASTRUCTS/busc_ord/cmake-build-debug/CMakeFiles/busc_ord.dir

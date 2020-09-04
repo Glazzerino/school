@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/busc_ord.dir/src/main.cpp.o  -o busc_ord 

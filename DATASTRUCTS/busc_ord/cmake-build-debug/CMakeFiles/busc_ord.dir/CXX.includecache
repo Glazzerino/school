@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/glazz/code/school/DATASTRUCTS/busc_ord/src/Timer.h
+iostream
+-
+chrono
+-
+
+/home/glazz/code/school/DATASTRUCTS/busc_ord/src/main.cpp
+vector
+-
+iomanip
+-
+ctime
+-
+cmath
+-
+stack
+-
+Timer.h
+/home/glazz/code/school/DATASTRUCTS/busc_ord/src/Timer.h
+tuple
+-
+set
+-
+
