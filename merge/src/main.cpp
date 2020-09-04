@@ -101,26 +101,41 @@ void mergesort(vector<T> &list) {
 //    auto merged = merge(metalist[0], metalist[1]);
 //    auto merged2 = merge(merged, metalist[2]);
 //    display_vector<int>(merged2);
+    for (auto x : metalist) {
+        display_vector(x);
+    }
 
     while(metalist.size() > 1) {
 
 //        cout << "spinch" << endl;
+
         for (int i = 0; i < metalist.size() - 1; i+=2) {
+//            auto deleteme = merge(metalist[i], metalist[i + 1]);
+//            display_vector(deleteme);
             temp.push_back(merge(metalist[i], metalist[i + 1]));
+
+            display_vector(metalist[i+1]);
         }
+        if (metalist.size() % 2 != 0) {
+            temp.push_back(metalist[metalist.size()-1]);
+        }
+
 //        if (!metalist.empty()) {
 //            cout << metalist.size() << endl;
 //        }
         swap(metalist, temp);
         temp.clear();
     }
+//    for (auto x : metalist) {
+//        display_vector(x);
+//    }
     swap(list, metalist[0]);
 //    temp.clear();
 }
 
 int main() {
-    vector<int> list{1};
-    display_vector(list);
+    vector<int> list{11,31,9,9,7,100,20,11};
+//    display_vector(list);
     vector<int> a{1, 3, 5};
     vector<int> b{2, 4};
     mergesort<int>(list);
